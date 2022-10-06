@@ -38,7 +38,6 @@ export default async function decorate(block) {
     });
 
     const navSections = [...nav.children][2];
-    console.log(navSections);
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
@@ -50,16 +49,6 @@ export default async function decorate(block) {
       });
     }
 
-    // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
-    hamburger.addEventListener('click', () => {
-      const expanded = nav.getAttribute('aria-expanded') === 'true';
-      document.body.style.overflowY = expanded ? '' : 'hidden';
-      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    nav.prepend(hamburger);
     nav.setAttribute('aria-expanded', 'false');
     decorateIcons(nav);
     block.append(nav);
