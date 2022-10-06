@@ -130,6 +130,7 @@ header nav .nav-sections ul  {
 header nav .nav-sections li {
   font-size: 20px;
   font-weight: 500;
+  color: var(--brand-red)
 }
 
 header nav[aria-expanded='true'] .nav-sections {
