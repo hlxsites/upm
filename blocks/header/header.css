@@ -161,13 +161,42 @@ header nav[aria-expanded='true'] .nav-tools li {
   padding: 0;
 }
 
+/* top links */
+header nav .nav-top-links {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  display: flex;
+  background-color: var(--brand-gold);
+  border-radius: 0 0 12px 12px;
+}
+
+header nav .nav-top-links ul {
+  display: flex;
+  margin: 0;
+  padding: 5px;
+}
+
+header nav .nav-top-links ul li {
+  font-size: 14px;
+  text-decoration: none;
+  list-style: none;
+  background: unset;
+  color: black;
+}
+
+header nav .nav-top-links ul li:any-link:hover {
+  color: black;
+  background: none;
+}
+
 /* desktop nav styles */
 @media (min-width: 1000px) {
   header nav {
     display: grid;
     grid-template:
     'brand brand brand' 4fr
-    'sections sections tools' 1fr / 1fr;
+    'sections sections tools' 1fr / 50px 1fr;
     height: var(--nav-height);
   }
 
