@@ -1,0 +1,25 @@
+main .slideshow-container {
+  padding: 0;
+}
+
+.slideshow > div:not(:last-child) {
+  display: none;
+}
+
+.slideshow > div[active='true'] {
+  display: initial;
+}
+
+.slideshow > div[next='true'] {
+  display: initial;
+  transform: translateX(100vw);
+}
+
+.slideshow > div[next='prev'] {
+  display: initial;
+  transform: translateX(-100vw);
+}
+
+.controls-container {
+  display: initial;
+}

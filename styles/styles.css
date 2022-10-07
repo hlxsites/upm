@@ -45,6 +45,11 @@
 
 }
 
+main {
+  overflow-x: hidden;
+
+}
+
 body {
   font-size: var(--body-font-size-m);
   margin: 0;
