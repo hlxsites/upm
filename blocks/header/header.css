@@ -123,6 +123,8 @@ header nav .nav-top-links a:any-link {
 
 header nav .nav-top-links ul {
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   padding: 5px;
 }
@@ -143,6 +145,10 @@ header nav .nav-sections > ul > li > ul > li {
 header nav .nav-sections ul li:hover > a, header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover {
   background-color: var(--brand-green);
   color: white;
+}
+
+header nav .nav-sections .nav-drop > ul > li:has(ul) {
+  cursor: initial;
 }
 
 header nav .nav-top-links a:any-link:hover {
@@ -263,20 +269,7 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
   }
 }
 
-@media (max-width: 950px) {
-  header nav {
-    grid-template:
-    'brand brand brand' 4fr
-    'sections sections sections' 4fr
-    'tools tools tools' 2fr/ 50px 1fr;
-  }
-
-  header nav .nav-brand img {
-    height: 40px;
-    width: auto;
-  }
-}
-
+/* mobile styles */
 @media (max-width: 800px) {
   header nav {
     grid-template:
@@ -284,16 +277,28 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     'tools tools tools' 1fr/ 50px 1fr;
   }
 
-  header nav[aria-expanded='true'] .nav-top-links {
+  header nav[aria-expanded='false'] .nav-top-links {
     display: none;
+  }
+
+  header nav[aria-expanded='true'] .nav-top-links {
+    display: block;
+    grid-area: top-links;
+    position: initial;
+  }
+
+  header nav[aria-expanded='true'] .nav-top-links li a {
+    font-size: 18px;
+    padding: 0 12px;
   }
 
   header nav[aria-expanded='true'] {
     min-height: 100vh;
     overflow-y: scroll;
     grid-template:
-    'hamburger brand brand' 100px
-    'tools tools tools' 100px
+    'hamburger brand brand' 90px
+    'tools tools tools' 90px
+    'top-links top-links top-links' 34px
     'sections sections sections' auto / 50px 1fr;
   }
 
@@ -304,6 +309,10 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
 
   header nav[aria-expanded='true'] .nav-sections ul {
     flex-direction: column;
+  }
+
+  header nav[aria-expanded='true'] .nav-sections ul > li {
+    padding: 8px 10px;
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] ul {
@@ -324,12 +333,9 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
   }
 
   header nav .nav-brand img {
-    height: auto;
-    width: 80%;
-  }
-
-  header nav[aria-expanded='false'] .nav-brand img {
-    display: none;
+    box-sizing: border-box;
+    height: 80px;
+    width: auto;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
