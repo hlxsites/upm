@@ -145,10 +145,9 @@ header nav .nav-sections > ul > li > ul > li {
   padding: 8px 16px;
 }
 
-header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover {
+header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover, header nav .nav-sections ul li:hover > a {
   background-color: var(--brand-green);
   color: white;
-  text-decoration: underline;
 }
 
 header nav .nav-top-links ul li:any-link:hover {
@@ -232,6 +231,10 @@ header nav .nav-sections .nav-drop > ul > li:hover > ul > li a {
   color: white;
 }
 
+header nav .nav-sections .nav-drop > ul > li:hover > ul > li a:hover {
+  text-decoration: underline;
+}
+
 header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
   background-color: unset;
   list-style: disclosure-closed;
@@ -287,6 +290,7 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
 
   header nav[aria-expanded='true'] {
     min-height: 100vh;
+    overflow-y: scroll;
     grid-template:
     'hamburger brand brand' 100px
     'tools tools tools' 100px
@@ -300,6 +304,8 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
 
   header nav .nav-sections > ul > li[aria-expanded='true'] ul {
     position: initial;
+    box-shadow: unset;
+    margin-bottom: 8px;
   }
 
   header nav .nav-hamburger {
@@ -328,8 +334,6 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
 
   header nav[aria-expanded='true'] .nav-sections {
     display: initial;
-    grid-area: unset;
-    top: var(--nav-height);
   }
 
   header nav[aria-expanded='false'] .nav-hamburger-icon,
