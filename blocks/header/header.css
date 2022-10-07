@@ -1,6 +1,5 @@
 /* header and nav layout */
 header nav {
-  overflow: hidden;
   display: grid;
   grid-template:
     'brand brand brand' 7fr
@@ -70,12 +69,6 @@ header nav .nav-sections li {
   font-size: 20px;
   font-weight: 500;
   color: var(--brand-red)
-}
-
-header nav a:any-link:hover, header nav ul li:hover {
-  background-color: var(--brand-green);
-  color: white;
-  text-decoration: underline;
 }
 
 header nav .nav-sections > ul > li {
@@ -153,6 +146,12 @@ header nav .nav-sections > ul > li > ul > li {
   padding: 8px 16px;
 }
 
+header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover {
+  background-color: var(--brand-green);
+  color: white;
+  text-decoration: underline;
+}
+
 header nav .nav-top-links ul li:any-link:hover {
   color: black;
   background: none;
@@ -195,25 +194,48 @@ header nav .nav-sections > ul > li > ul:any-link {
   font-size: var(--body-font-size-m);
 }
 
-header nav .nav-sections > ul > li > ul::before {
-  content: '';
-  width: 0;
-  height: 0;
-  position: absolute;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid var(--highlight-background-color);
-  top: -15px;
-  left: 20px;
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-sections .nav-drop > ul > li > ul > li {
+  box-shadow: none;
+  font-size: 14px;
+  list-style: disclosure-closed;
 }
 
 header nav .nav-sections > ul > li[aria-expanded='true'] ul {
   display: block;
   position: absolute;
-  background-color: var(--highlight-background-color);
+  background-color: var(--background-color);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 17.5%);
   width: 300px;
   left: 0;
   padding: 16px;
+  border-radius: 4px;
+}
+
+header nav .nav-sections .nav-drop > ul > li > ul {
+  box-shadow: none;
+  padding-left: 40px;
+  display: block;
+  position: initial;
+  width: unset;
+}
+
+header nav .nav-sections .nav-drop > ul > li:hover > ul {
+  background-color: var(--brand-green);
+  color: white;
+}
+
+header nav .nav-sections .nav-drop > ul > li:hover > ul > li {
+  color: white;
+}
+
+header nav .nav-sections .nav-drop > ul > li:hover > ul > li a {
+  color: white;
+}
+
+header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
+  background-color: unset;
+  list-style: disclosure-closed;
 }
 
 @media (max-width: 1170px) {
