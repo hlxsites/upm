@@ -51,6 +51,17 @@ export default async function decorate(block) {
 
     nav.setAttribute('aria-expanded', 'false');
 
+    // hamburger for mobile
+    const hamburger = document.createElement('div');
+    hamburger.classList.add('nav-hamburger');
+    hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
+    hamburger.addEventListener('click', () => {
+      const expanded = nav.getAttribute('aria-expanded') === 'true';
+      document.body.style.overflowY = expanded ? '' : 'hidden';
+      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    nav.prepend(hamburger);
+
     decorateIcons(nav);
     block.append(nav);
 
