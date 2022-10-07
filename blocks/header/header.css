@@ -121,11 +121,6 @@ header nav .nav-top-links a:any-link {
   color: black;
 }
 
-header nav .nav-top-links a:any-link:hover {
-  color: black;
-  background-color: unset;
-}
-
 header nav .nav-top-links ul {
   display: flex;
   margin: 0;
@@ -145,9 +140,14 @@ header nav .nav-sections > ul > li > ul > li {
   padding: 8px 16px;
 }
 
-header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover, header nav .nav-sections ul li:hover > a {
+header nav .nav-sections ul li:hover > a, header nav .nav-sections a:any-link:hover, header nav .nav-sections ul li:hover {
   background-color: var(--brand-green);
   color: white;
+}
+
+header nav .nav-top-links a:any-link:hover {
+  color: black;
+  background-color: unset;
 }
 
 header nav .nav-top-links ul li:any-link:hover {
@@ -302,6 +302,10 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     align-self: flex-start;
   }
 
+  header nav[aria-expanded='true'] .nav-sections ul {
+    flex-direction: column;
+  }
+
   header nav .nav-sections > ul > li[aria-expanded='true'] ul {
     position: initial;
     box-shadow: unset;
@@ -319,17 +323,13 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     justify-content: center;
   }
 
-  header nav[aria-expanded='false'] .nav-brand img {
-    display: none;
-  }
-
-  header nav[aria-expanded='true'] .nav-sections ul {
-    flex-direction: column;
-  }
-
   header nav .nav-brand img {
     height: auto;
     width: 80%;
+  }
+
+  header nav[aria-expanded='false'] .nav-brand img {
+    display: none;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
