@@ -15,7 +15,7 @@ main .slideshow-container {
   transform: translateX(100vw);
 }
 
-.slideshow > div[next='prev'] {
+.slideshow > div[prev='true'] {
   display: initial;
   transform: translateX(-100vw);
 }
