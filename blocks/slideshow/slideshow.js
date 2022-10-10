@@ -1,3 +1,5 @@
+import { decorateIcons } from '../../scripts/scripts.js';
+
 function getCurrentSlideIndex($block) {
   return [...$block.children].findIndex(($child) => $child.getAttribute('active') === 'true');
 }
@@ -8,21 +10,39 @@ export default async function decorate($block) {
   $block.children[numChildren - 1].setAttribute('prev', true);
   $block.children[1].setAttribute('next', true);
 
-  // create wrapper for slides
+  // set a11y properties
+  $block.setAttribute('role', 'group');
+  $block.setAttribute('aria-roledescription', 'carousel');
+
+  // move slides into slides wrapper
   const $slidesContainer = document.createElement('div');
   $slidesContainer.innerHTML = $block.innerHTML;
   $block.innerHTML = '';
   $block.prepend($slidesContainer);
   $slidesContainer.classList.add('slides-container');
 
+  [...$slidesContainer.children].forEach(($slide, i) => {
+    // set slide a11y properties
+    $slide.setAttribute('role', 'group');
+    $slide.setAttribute('aria-roledescription', 'slide');
+    $slide.setAttribute('aria-label', `Slide ${i} of ${numChildren}`);
+
+    // Make the picture be the link
+    const $anchor = $slide.querySelector('a');
+    const $picture = $slide.querySelector('picture');
+    $anchor.innerHTML = $picture.outerHTML;
+    $picture.remove();
+  });
+
   // create controls
   const $controlsContainer = document.createElement('div');
   $controlsContainer.classList.add('controls-container');
   $controlsContainer.innerHTML = `
-    <button name="prev">Prev</button>
-    <button name="next">Next</button>
+    <button name="prev" aria-label="Previous Slide" class="control-button"><span class="icon icon-chevron-left" /></button>
+    <button name="next" aria-label="Next Slide" class="control-button"><span class="icon icon-chevron-right" /></button>
   `;
-  $block.prepend($controlsContainer);
+  $block.append($controlsContainer);
+  decorateIcons($controlsContainer);
 
   const nextButton = $controlsContainer.querySelector('button[name="next"]');
   const prevButton = $controlsContainer.querySelector('button[name="prev"]');
