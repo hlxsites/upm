@@ -1,6 +1,8 @@
 main .slideshow-container {
   padding: 0;
   position: relative;
+
+  --tab-bar-height: 30px;
 }
 
 .controls-container {
@@ -59,7 +61,7 @@ main .slideshow-container {
 
 .tab-bar-container {
   background-color: var(--brand-red);
-  height: 24px;
+  height: var(--tab-bar-height);
   position: relative;
 }
 
@@ -70,19 +72,18 @@ main .slideshow-container {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: -10px;
-  left: 50%;
-  margin: 0 0 0 -40px;
+  top: -28px;
+  left: 10px;
 }
 
 .tab-bar-container > ol button {
-  padding: 0;
+  padding: 8px;
   margin: 0;
 }
 
 .tab-bar-container::before {
   background-color: var(--brand-green);
-  height: 12px;
+  height: calc(var(--tab-bar-height) / 2);
   width: 100%;
   display: block;
   content: "";
@@ -92,9 +93,44 @@ main .slideshow-container {
   max-width: unset;
 }
 
+.social-links {
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.social-links img {
+  display: block;
+  height: calc(var(--tab-bar-height) - 2px);
+  width: auto;
+}
+
+.social-links p {
+  margin: 0 14px 0 0;
+}
+
 /* desktop styles */
 @media (min-width: 900px) {
+  main .slideshow-container {
+    --tab-bar-height: 24px;
+  }
+
   .section > div.slideshow-wrapper {
     max-width: unset;
+  }
+
+  .social-links p {
+    margin: 0 4px 0 0;
+  }
+
+  .tab-bar-container > ol {
+    top: -10px;
+    left: 50%;
+    margin: 0 0 0 -40px;
+  }
+
+  .tab-bar-container > ol button {
+    padding: 0;
   }
 }

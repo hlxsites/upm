@@ -106,14 +106,14 @@ export default async function decorate($block) {
   });
 
   // add social link icons
-  // const $socialLinks = $socialContainer.querySelector(':scope > div + div');
-  // [$socialLinks.children].forEach(($child, index) => {
-  //   if (index % 2 !== 0) {
-  //     return;
-  //   }
-  //
-  //   console.log($socialLinks.children[index + 1]);
-  // });
-  //
-  // $block.append($socialContainer);
+  const $socialLinks = $socialContainer.querySelector(':scope > div + div');
+  $socialLinks.className = 'social-links';
+  [...$socialLinks.children].forEach(($child) => {
+    const $picture = $child.querySelector('picture');
+    const $anchor = $child.querySelector('a');
+    $anchor.innerHTML = $picture.outerHTML;
+    $picture.remove();
+  });
+
+  $block.append($socialLinks);
 }
