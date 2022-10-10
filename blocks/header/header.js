@@ -31,13 +31,13 @@ export default async function decorate(block) {
     nav.innerHTML = html;
     decorateIcons(nav);
 
-    const classes = ['brand', 'sections', 'tools'];
+    const classes = ['brand', 'top-links', 'sections', 'tools'];
     classes.forEach((e, j) => {
       const section = nav.children[j];
       if (section) section.classList.add(`nav-${e}`);
     });
 
-    const navSections = [...nav.children][1];
+    const navSections = [...nav.children][2];
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
@@ -49,6 +49,8 @@ export default async function decorate(block) {
       });
     }
 
+    nav.setAttribute('aria-expanded', 'false');
+
     // hamburger for mobile
     const hamburger = document.createElement('div');
     hamburger.classList.add('nav-hamburger');
@@ -59,8 +61,25 @@ export default async function decorate(block) {
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
     nav.prepend(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
+
     decorateIcons(nav);
     block.append(nav);
+
+    // Extract search bar config
+    const $searchAnchor = block.querySelector('.nav-tools p a');
+    const $searchPara = block.querySelector('.nav-tools p');
+    if ($searchAnchor) {
+      const searchHref = $searchAnchor.getAttribute('href');
+      const searchIconClass = $searchAnchor.querySelector('span')?.classList;
+      $searchPara.innerHTML = `
+        <form action="${searchHref}">
+            <input name="query" type="text" placeholder="Search" />
+            <button type="submit">
+                <span class="${searchIconClass.toString()}"></span>
+            </button>
+        </form>
+      `;
+      decorateIcons($searchPara);
+    }
   }
 }
