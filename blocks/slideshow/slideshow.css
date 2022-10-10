@@ -47,21 +47,31 @@ main .slideshow-container {
   height: 32px;
 }
 
+.tab-bar-container > ol svg {
+  width: 8px;
+  height: 8px;
+}
+
 .control-button:hover svg {
   color: #7f7f7f;
 }
 
 .tab-bar-container {
   background-color: var(--brand-red);
+  height: 24px;
+  position: relative;
 }
 
 .tab-bar-container > ol {
   display: flex;
   list-style: none;
-  margin: 0;
   padding: 0;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin: 0 0 0 -40px;
 }
 
 .tab-bar-container > ol button {
@@ -69,7 +79,10 @@ main .slideshow-container {
   margin: 0;
 }
 
-.tab-bar-container > ol svg {
-  width: 8px;
-  height: 8px;
+.tab-bar-container::before {
+  background-color: var(--brand-green);
+  height: 12px;
+  width: 100%;
+  display: block;
+  content: "";
 }
