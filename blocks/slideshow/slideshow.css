@@ -13,6 +13,7 @@ main .slideshow-container {
   align-items: center;
   justify-content: space-between;
   pointer-events: none;
+  background: radial-gradient(circle, rgb(255 255 255 / 0%) 53%, rgb(61 61 61 / 82.5%) 100%);
 }
 
 .slides-container {
