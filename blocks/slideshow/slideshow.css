@@ -12,6 +12,7 @@ main .slideshow-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  pointer-events: none;
 }
 
 .slides-container {
@@ -26,9 +27,14 @@ main .slideshow-container {
 
 .control-button {
   background: none;
+  pointer-events: initial;
 }
 
 .control-button:hover {
+  background: none;
+}
+
+.control-button:focus {
   background: none;
 }
 
@@ -39,4 +45,27 @@ main .slideshow-container {
 
 .control-button:hover svg {
   color: #7f7f7f;
+}
+
+.tab-bar-container {
+  background-color: var(--brand-red);
+}
+
+.tab-bar-container > ol {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-bar-container > ol button {
+  padding: 0;
+  margin: 0;
+}
+
+.tab-bar-container > ol svg {
+  width: 8px;
+  height: 8px;
 }

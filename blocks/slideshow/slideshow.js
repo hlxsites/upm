@@ -4,6 +4,22 @@ function getCurrentSlideIndex($block) {
   return [...$block.children].findIndex(($child) => $child.getAttribute('active') === 'true');
 }
 
+function updateSlide(nextIndex, $block) {
+  const $slidesContainer = $block.querySelector('.slides-container');
+  const $tabBar = $block.querySelector('.tab-bar-container');
+
+  const currentIndex = getCurrentSlideIndex($slidesContainer);
+
+  $slidesContainer.children[currentIndex].removeAttribute('active');
+  $slidesContainer.children[nextIndex].setAttribute('active', true);
+
+  $tabBar.querySelector('ol').children[currentIndex].querySelector('span').className = 'icon icon-circle';
+  $tabBar.querySelector('ol').children[nextIndex].querySelector('span').className = 'icon icon-circle-fill';
+  decorateIcons($tabBar.querySelector('ol'));
+
+  $slidesContainer.style.transform = `translateX(-${nextIndex * 100}vw)`;
+}
+
 export default async function decorate($block) {
   const numChildren = $block.children.length;
   $block.children[0].setAttribute('active', true);
@@ -49,21 +65,26 @@ export default async function decorate($block) {
 
   nextButton.addEventListener('click', () => {
     const currentIndex = getCurrentSlideIndex($slidesContainer);
-    const add1 = (currentIndex + 1) % numChildren;
-
-    $slidesContainer.children[currentIndex].removeAttribute('active');
-    $slidesContainer.children[add1].setAttribute('active', true);
-
-    $slidesContainer.style.transform = `translateX(-${add1 * 100}vw)`;
+    updateSlide((currentIndex + 1) % numChildren, $block);
   });
 
   prevButton.addEventListener('click', () => {
     const currentIndex = getCurrentSlideIndex($slidesContainer);
-    const neg1 = (((currentIndex - 1) % numChildren) + numChildren) % numChildren;
-
-    $slidesContainer.children[currentIndex].removeAttribute('active');
-    $slidesContainer.children[neg1].setAttribute('active', true);
-
-    $slidesContainer.style.transform = `translateX(-${neg1 * 100}vw)`;
+    updateSlide((((currentIndex - 1) % numChildren) + numChildren) % numChildren, $block);
   });
+
+  // create tab bar
+  const $tabBar = document.createElement('div');
+  $tabBar.classList.add('tab-bar-container');
+  $tabBar.innerHTML = '<ol role="tablist"></ol>';
+  [...$slidesContainer.children].forEach(($slide, i) => {
+    const $tabBarButton = document.createElement('li');
+    $tabBarButton.innerHTML = `<button class="control-button"><span class="icon icon-circle${i === 0 ? '-fill' : ''}" /></button>`;
+    $tabBar.querySelector('ol').append($tabBarButton);
+    $tabBarButton.querySelector('button').addEventListener('click', () => {
+      updateSlide(i, $block);
+    });
+  });
+  $block.append($tabBar);
+  decorateIcons($tabBar);
 }
