@@ -2,36 +2,12 @@ main .slideshow-container {
   padding: 0;
 }
 
-.slideshow.block {
-  position: relative;
-  height: 500px;
+.slides-container {
+  display: flex;
+  transition: transform 200ms;
 }
 
-.slideshow > div:not(:first-child) {
-  top: 160px;
-  display: none;
-  transition: 300ms transform;
-  transform: translateX(0);
-}
-
-.slideshow > div[active='true'] {
-  display: initial;
-}
-
-.slideshow > div[next='true'] {
-  display: initial;
-  position: relative;
-  top: 0;
-  transform: translateX(100vw);
-}
-
-.slideshow > div[prev='true'] {
-  display: initial;
-  position: relative;
-  top: 0;
-  transform: translateX(-100vw);
-}
-
-.controls-container {
-  display: initial;
+.slides-container > div {
+  width: 100vw;
+  flex-shrink: 0;
 }

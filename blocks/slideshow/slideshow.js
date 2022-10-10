@@ -8,6 +8,13 @@ export default async function decorate($block) {
   $block.children[numChildren - 1].setAttribute('prev', true);
   $block.children[1].setAttribute('next', true);
 
+  // create wrapper for slides
+  const $slidesContainer = document.createElement('div');
+  $slidesContainer.innerHTML = $block.innerHTML;
+  $block.innerHTML = '';
+  $block.prepend($slidesContainer);
+  $slidesContainer.classList.add('slides-container');
+
   // create controls
   const $controlsContainer = document.createElement('div');
   $controlsContainer.classList.add('controls-container');
@@ -21,30 +28,22 @@ export default async function decorate($block) {
   const prevButton = $controlsContainer.querySelector('button[name="prev"]');
 
   nextButton.addEventListener('click', () => {
-    const currentIndex = getCurrentSlideIndex($block);
-    const neg1 = (((currentIndex - 1) % numChildren) + numChildren) % numChildren;
+    const currentIndex = getCurrentSlideIndex($slidesContainer);
     const add1 = (currentIndex + 1) % numChildren;
-    const add2 = (currentIndex + 2) % numChildren;
 
-    $block.children[neg1].removeAttribute('prev');
-    $block.children[currentIndex].removeAttribute('active');
-    $block.children[currentIndex].setAttribute('prev', true);
-    $block.children[add1].setAttribute('active', true);
-    $block.children[add1].removeAttribute('next');
-    $block.children[add2].setAttribute('next', true);
+    $slidesContainer.children[currentIndex].removeAttribute('active');
+    $slidesContainer.children[add1].setAttribute('active', true);
+
+    $slidesContainer.style.transform = `translateX(-${add1 * 100}vw)`;
   });
 
   prevButton.addEventListener('click', () => {
-    const currentIndex = getCurrentSlideIndex($block);
-    const neg2 = (((currentIndex - 2) % numChildren) + numChildren) % numChildren;
+    const currentIndex = getCurrentSlideIndex($slidesContainer);
     const neg1 = (((currentIndex - 1) % numChildren) + numChildren) % numChildren;
-    const add1 = (currentIndex + 1) % numChildren;
 
-    $block.children[add1].removeAttribute('next');
-    $block.children[currentIndex].removeAttribute('active');
-    $block.children[currentIndex].setAttribute('next', true);
-    $block.children[neg1].setAttribute('active', true);
-    $block.children[neg1].removeAttribute('prev');
-    $block.children[neg2].setAttribute('prev', true);
+    $slidesContainer.children[currentIndex].removeAttribute('active');
+    $slidesContainer.children[neg1].setAttribute('active', true);
+
+    $slidesContainer.style.transform = `translateX(-${neg1 * 100}vw)`;
   });
 }
