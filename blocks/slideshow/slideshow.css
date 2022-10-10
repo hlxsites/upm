@@ -20,6 +20,10 @@ main .slideshow-container {
   transition: transform 200ms;
 }
 
+.slides-container img {
+  display: block;
+}
+
 .slides-container > div {
   width: 100vw;
   flex-shrink: 0;

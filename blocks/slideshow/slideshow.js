@@ -1,4 +1,5 @@
 import { decorateIcons } from '../../scripts/scripts.js';
+import ResumableInterval from './ResumeableInterval.js';
 
 function getCurrentSlideIndex($block) {
   return [...$block.children].findIndex(($child) => $child.getAttribute('active') === 'true');
@@ -87,4 +88,19 @@ export default async function decorate($block) {
   });
   $block.append($tabBar);
   decorateIcons($tabBar);
+
+  // auto-play
+  const autoplayTimer = new ResumableInterval(7000, () => {
+    const currentIndex = getCurrentSlideIndex($slidesContainer);
+    updateSlide((currentIndex + 1) % numChildren, $block);
+  });
+  autoplayTimer.start();
+
+  $block.addEventListener('mouseenter', () => {
+    autoplayTimer.pause();
+  });
+
+  $block.addEventListener('mouseleave', () => {
+    autoplayTimer.resume();
+  });
 }
