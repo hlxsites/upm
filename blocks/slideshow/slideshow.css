@@ -2,8 +2,16 @@ main .slideshow-container {
   padding: 0;
 }
 
-.slideshow > div:not(:last-child) {
+.slideshow.block {
+  position: relative;
+  height: 500px;
+}
+
+.slideshow > div:not(:first-child) {
+  top: 160px;
   display: none;
+  transition: 300ms transform;
+  transform: translateX(0);
 }
 
 .slideshow > div[active='true'] {
@@ -12,11 +20,15 @@ main .slideshow-container {
 
 .slideshow > div[next='true'] {
   display: initial;
+  position: relative;
+  top: 0;
   transform: translateX(100vw);
 }
 
 .slideshow > div[prev='true'] {
   display: initial;
+  position: relative;
+  top: 0;
   transform: translateX(-100vw);
 }
 
