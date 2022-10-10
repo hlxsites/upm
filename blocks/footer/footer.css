@@ -1,6 +1,10 @@
+:root {
+  --footer-font-size: 14px;
+}
+
 footer {
   padding: 2rem;
-  background-color: var(--overlay-background-color);
+  background-color: var(--background-color);
   font-size: var(--body-font-size-s);
 }
 
@@ -9,6 +13,64 @@ footer .footer {
   margin: auto;
 }
 
+footer .footer > div {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  color: var(--brand-red);
+  text-align: center;
+  font-size: var(--footer-font-size);
+}
+
+footer .footer .back-to-top-container {
+  display: flex;
+  justify-content: center;
+}
+
+footer .footer > div > div:first-child {
+  border-bottom: 1px solid var(--overlay-background-color);
+  display: block;
+}
+
+footer .footer div a:any-link {
+  color: var(--brand-red);
+}
+
+footer .footer div ul {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+footer .footer .back-to-top {
+  display: flex;
+  background: none;
+  color: black;
+  align-items: center;
+  border-radius: 6px;
+  transition: background-color 300ms;
+}
+
+footer .footer .back-to-top:hover {
+  background-color: var(--overlay-background-color);
+}
+
 footer .footer p {
   margin: 0;
+}
+
+/* desktop styles */
+@media (min-width: 1000px) {
+  footer .footer > div > div:first-child {
+    position: relative;
+  }
+
+  footer .footer .back-to-top-container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 }
