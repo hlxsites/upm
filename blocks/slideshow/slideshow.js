@@ -22,10 +22,11 @@ function updateSlide(nextIndex, $block) {
 }
 
 export default async function decorate($block) {
+  const $socialContainer = [...$block.children].find(($child) => $child.querySelector(':scope > div').innerHTML === 'Social');
+  $socialContainer.remove();
+
   const numChildren = $block.children.length;
   $block.children[0].setAttribute('active', true);
-  $block.children[numChildren - 1].setAttribute('prev', true);
-  $block.children[1].setAttribute('next', true);
 
   // set a11y properties
   $block.setAttribute('role', 'group');
@@ -103,4 +104,16 @@ export default async function decorate($block) {
   $block.addEventListener('mouseleave', () => {
     autoplayTimer.resume();
   });
+
+  // add social link icons
+  // const $socialLinks = $socialContainer.querySelector(':scope > div + div');
+  // [$socialLinks.children].forEach(($child, index) => {
+  //   if (index % 2 !== 0) {
+  //     return;
+  //   }
+  //
+  //   console.log($socialLinks.children[index + 1]);
+  // });
+  //
+  // $block.append($socialContainer);
 }

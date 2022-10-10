@@ -87,3 +87,14 @@ main .slideshow-container {
   display: block;
   content: "";
 }
+
+.slideshow-wrapper {
+  max-width: unset;
+}
+
+/* desktop styles */
+@media (min-width: 900px) {
+  .section > div.slideshow-wrapper {
+    max-width: unset;
+  }
+}
