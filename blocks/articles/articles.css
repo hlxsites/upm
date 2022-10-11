@@ -1,3 +1,7 @@
+.article-column {
+  padding: 30px;
+}
+
 .article-column:not(:first-child) {
   margin-top: 100px;
 }
@@ -9,10 +13,12 @@
   gap: 30px;
   flex-basis: 100px;
   flex-grow: 1;
+  padding: 30px;
 }
 
 .article-column.banner-style > div {
   border-radius: 10px;
+  background: white;
   border: 1px solid var(--brand-red);
   display: inline-block;
   overflow: hidden;
@@ -56,6 +62,10 @@
 
 /* desktop styles */
 @media (min-width: 700px) {
+  .article-column.article-style.article-gray, .article-column.banner-style {
+    background-color: var(--overlay-background-color);
+  }
+
   .article-column.banner-style {
     display: grid;
     grid-template: auto / 1fr 1fr;
@@ -70,7 +80,7 @@
 @media (min-width: 1200px) {
   .articles {
     display: flex;
-    gap: 150px;
+    gap: 60px;
   }
 
   .article-column.banner-style {

@@ -32,7 +32,7 @@ export default async function decorate(block) {
 
   columns.map(async ({ title, tag, layout }) => {
     const $col = document.createElement('div');
-    $col.classList.add('article-column', layout);
+    $col.classList.add('article-column', ...layout.split(' '));
 
     if (title) {
       $col.innerHTML = title;
