@@ -1,0 +1,24 @@
+.link-list.block {
+  margin-top: 50px;
+  border-top: 4px solid var(--brand-red);
+}
+
+.link-list.block ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.link-list.block ul li {
+  color: white;
+  background: var(--brand-red);
+  padding: 8px;
+  font-size: 14px;
+}
+
+.link-list.block ul li * {
+  color: white;
+}
