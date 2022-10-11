@@ -28,6 +28,8 @@ export default async function decorate(block) {
   const columns = readColumns(block, ['title', 'tag', 'layout']);
   block.innerHTML = '';
 
+  const newsIndex = await fetchIndex('query-index');
+
   columns.map(async ({ title, tag, layout }) => {
     const $col = document.createElement('div');
     $col.classList.add('article-column', layout);
@@ -35,8 +37,6 @@ export default async function decorate(block) {
     if (title) {
       $col.innerHTML = title;
     }
-
-    const newsIndex = await fetchIndex('query-index');
 
     let rawNews = newsIndex.data;
     rawNews = rawNews.filter((news) => news.tags.includes(tag));
