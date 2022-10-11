@@ -6,6 +6,7 @@ import {
 export default async function decorate(block) {
   const config = readBlockConfig(block);
   const layout = config?.layout || 'news';
+  block.classList.add(layout);
   block.innerHTML = '';
 
   const newsIndex = await fetchIndex('query-index');
@@ -15,18 +16,19 @@ export default async function decorate(block) {
 
   rawNews.forEach((newsItem) => {
     const eachNews = document.createElement('div');
-    eachNews.classList.add('news');
-    if(newsItem.image) {
+    if (newsItem.image) {
       eachNews.innerHTML += `
       <a href="${newsItem.path}" target="_blank">
         <img src="${newsItem.image}" />
       </a>
       `;
     }
-    eachNews.innerHTML += `
-      <h2>${newsItem.title}</h2>
-      <a href="${newsItem.path}" target="_blank">Read More</a>
-    `;
+    if (layout !== 'banner') {
+      eachNews.innerHTML += `
+        <h2>${newsItem.title}</h2>
+        <a href="${newsItem.path}" target="_blank">Read More</a>
+      `;
+    }
     block.appendChild(eachNews);
   });
 }
