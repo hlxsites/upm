@@ -43,7 +43,7 @@ export default async function decorate($block) {
     // set slide a11y properties
     $slide.setAttribute('role', 'group');
     $slide.setAttribute('aria-roledescription', 'slide');
-    $slide.setAttribute('aria-label', `Slide ${i} of ${numChildren}`);
+    $slide.setAttribute('aria-label', `Slide ${i + 1} of ${numChildren}`);
 
     // Make the picture be the link
     const $anchor = $slide.querySelector('a');
