@@ -110,6 +110,11 @@ main .slideshow-container {
   margin: 0 14px 0 0;
 }
 
+.slides-container > div > div {
+  display: flex;
+  justify-content: center;
+}
+
 /* desktop styles */
 @media (min-width: 900px) {
   main .slideshow-container {
