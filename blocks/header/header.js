@@ -74,7 +74,7 @@ export default async function decorate(block) {
       $searchPara.innerHTML = `
         <form action="${searchHref}">
             <input name="query" type="text" placeholder="Search" />
-            <button type="submit">
+            <button type="submit" aria-label="submit search query">
                 <span class="${searchIconClass.toString()}"></span>
             </button>
         </form>
