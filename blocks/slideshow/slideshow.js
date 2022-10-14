@@ -5,6 +5,18 @@ function getCurrentSlideIndex($block) {
   return [...$block.children].findIndex(($child) => $child.getAttribute('active') === 'true');
 }
 
+function disableChildLinks($slide) {
+  [...$slide.querySelectorAll(':scope a')].forEach(($anchor) => {
+    $anchor.setAttribute('disabled', true);
+  });
+}
+
+function enableChildLinks($slide) {
+  [...$slide.querySelectorAll(':scope a')].forEach(($anchor) => {
+    $anchor.removeAttribute('disabled');
+  });
+}
+
 function updateSlide(nextIndex, $block) {
   const $slidesContainer = $block.querySelector('.slides-container');
   const $tabBar = $block.querySelector('.tab-bar-container');
@@ -12,8 +24,15 @@ function updateSlide(nextIndex, $block) {
   const currentIndex = getCurrentSlideIndex($slidesContainer);
 
   $slidesContainer.children[currentIndex].removeAttribute('active');
+  $slidesContainer.children[currentIndex].setAttribute('aria-hidden', true);
+  $slidesContainer.children[currentIndex].setAttribute('disabled', true);
+  disableChildLinks($slidesContainer.children[currentIndex]);
   $slidesContainer.children[nextIndex].setAttribute('active', true);
+  $slidesContainer.children[nextIndex].setAttribute('aria-hidden', false);
+  enableChildLinks($slidesContainer.children[nextIndex]);
 
+  $tabBar.querySelector('ol').children[currentIndex].setAttribute('aria-selected', false);
+  $tabBar.querySelector('ol').children[nextIndex].setAttribute('aria-selected', true);
   $tabBar.querySelector('ol').children[currentIndex].querySelector('span').className = 'icon icon-circle';
   $tabBar.querySelector('ol').children[nextIndex].querySelector('span').className = 'icon icon-circle-fill';
   decorateIcons($tabBar.querySelector('ol'));
@@ -41,9 +60,11 @@ export default async function decorate($block) {
 
   [...$slidesContainer.children].forEach(($slide, i) => {
     // set slide a11y properties
-    $slide.setAttribute('role', 'group');
+    $slide.setAttribute('role', 'tabpanel');
     $slide.setAttribute('aria-roledescription', 'slide');
     $slide.setAttribute('aria-label', `Slide ${i + 1} of ${numChildren}`);
+    $slide.setAttribute('aria-hidden', (i !== 0).toString());
+    if (i !== 0) disableChildLinks($slide);
 
     // Make the picture be the link
     const $anchor = $slide.querySelector('a');
@@ -81,7 +102,13 @@ export default async function decorate($block) {
   $tabBar.innerHTML = '<ol role="tablist"></ol>';
   [...$slidesContainer.children].forEach(($slide, i) => {
     const $tabBarButton = document.createElement('li');
-    $tabBarButton.innerHTML = `<button class="control-button"><span class="icon icon-circle${i === 0 ? '-fill' : ''}" /></button>`;
+
+    // set a11y properties
+    $tabBarButton.setAttribute('role', 'tab');
+    $tabBarButton.setAttribute('aria-selected', (i === 0).toString());
+
+    // add interactivity
+    $tabBarButton.innerHTML = `<button class="control-button" aria-label="Go to slide ${i + 1} of ${numChildren}"><span class="icon icon-circle${i === 0 ? '-fill' : ''}" /></button>`;
     $tabBar.querySelector('ol').append($tabBarButton);
     $tabBarButton.querySelector('button').addEventListener('click', () => {
       updateSlide(i, $block);
