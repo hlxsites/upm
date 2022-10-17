@@ -113,7 +113,7 @@ header nav .nav-top-links {
   right: 20px;
   display: flex;
   background-color: var(--brand-gold);
-  border-radius: 0 0 12px 12px;
+  border-radius: 0;
   color: black;
 }
 
@@ -297,8 +297,8 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     overflow-y: scroll;
     grid-template:
     'hamburger brand brand' 90px
-    'tools tools tools' 90px
     'top-links top-links top-links' 34px
+    'tools tools tools' 90px
     'sections sections sections' auto / 50px 1fr;
   }
 
