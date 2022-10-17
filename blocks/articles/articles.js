@@ -39,7 +39,7 @@ export default async function decorate(block) {
     }
 
     let rawNews = newsIndex.data;
-    rawNews = rawNews.filter((news) => news.tags.includes(tag));
+    rawNews = rawNews.filter((news) => news.tags.includes(tag)).sort((a, b) => a.lastModified - b.lastModified);
 
     rawNews.forEach((newsItem) => {
       const eachNews = document.createElement('div');
