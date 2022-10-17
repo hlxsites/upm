@@ -113,7 +113,7 @@ header nav .nav-top-links {
   right: 20px;
   display: flex;
   background-color: var(--brand-gold);
-  border-radius: 0;
+  border-radius: 0 0 12px 12px;
   color: black;
 }
 
@@ -277,6 +277,10 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     'tools tools tools' 1fr/ 50px 1fr;
   }
 
+  header nav .nav-top-links {
+    border-radius: 0;
+  }
+
   header nav[aria-expanded='false'] .nav-top-links {
     display: none;
   }
@@ -297,8 +301,8 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     overflow-y: scroll;
     grid-template:
     'hamburger brand brand' 90px
-    'top-links top-links top-links' 34px
     'tools tools tools' 90px
+    'top-links top-links top-links' 34px
     'sections sections sections' auto / 50px 1fr;
   }
 
