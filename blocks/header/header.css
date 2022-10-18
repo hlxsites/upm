@@ -277,6 +277,10 @@ header nav .nav-sections .nav-drop > ul > li > ul > li:hover {
     'tools tools tools' 1fr/ 50px 1fr;
   }
 
+  header nav .nav-top-links {
+    border-radius: 0;
+  }
+
   header nav[aria-expanded='false'] .nav-top-links {
     display: none;
   }
